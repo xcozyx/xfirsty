@@ -1058,7 +1058,6 @@ echo "$(((bytes + 1073741823) / 1073741824)) GB"
 fi
 }
 function cek-vmess(){
-clear
 xrayy=$(cat /var/log/xray/access.log | wc -l)
 if [[ xrayy -le 5 ]]; then
 systemctl restart xray

@@ -1098,7 +1098,7 @@ iplimit=$(cat /etc/vmess/${akun}IP)
 jum2=$(cat /tmp/ipvmess.txt | wc -l)
 byte=$(cat /etc/vmess/${akun})
 lim=$(convert ${byte})
-wey=$(cat /etc/limit/vmess/${akun})
+wey=$(cat /etc/vmess/${akun})
 gb=$(convert ${wey})
 lastlogin=$(cat /var/log/xray/access.log | grep -w "$akun" | tail -n 100 | cut -d " " -f 2 | tail -1)
 echo -e "$COLOR1${NC} USERNAME : \033[0;33m$akun";

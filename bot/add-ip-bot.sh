@@ -1,6 +1,6 @@
 #!/bin/bash
 # // PROJECT XDXL STORE
-url_izin="https://raw.githubusercontent.com/xcozyx/xfirsty/main/ip"
+url_izin="https://raw.githubusercontent.com/xcozyx/iz/main/ip"
 IP=$(curl -sS ipv4.icanhazip.com)
 data_server=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
 date_list=$(date +"%Y-%m-%d" -d "$data_server")

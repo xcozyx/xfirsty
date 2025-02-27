@@ -38,9 +38,9 @@ apt autoremove -y >/dev/null 2>&1
 sudo apt-get -y install vnstat
 /etc/init.d/vnstat restart
 sudo apt-get -y install libsqlite3-dev
-wget https://raw.githubusercontent.com/xcozyx/xfirsty/main/vnstat-2.6.tar.gz
-tar zxvf vnstat-2.6.tar.gz
-cd vnstat-2.6
+wget https://raw.githubusercontent.com/xcozyx/xfirsty/main/vnstat-2.13.tar.gz
+tar zxvf vnstat-2.13.tar.gz
+cd vnstat-2.13
 ./configure --prefix=/usr --sysconfdir=/etc && make && make install
 cd
 vnstat -u -i $NET
@@ -48,8 +48,8 @@ sed -i 's/Interface "'""eth0""'"/Interface "'""$NET""'"/g' /etc/vnstat.conf
 chown vnstat:vnstat /var/lib/vnstat -R
 systemctl enable vnstat
 /etc/init.d/vnstat restart
-rm -f /root/vnstat-2.6.tar.gz
-rm -rf /root/vnstat-2.6
+rm -f /root/vnstat-2.13.tar.gz
+rm -rf /root/vnstat-2.13
 
 yellow() { echo -e "\\033[33;1m${*}\\033[0m"; }
 yellow "Dependencies successfully installed..."

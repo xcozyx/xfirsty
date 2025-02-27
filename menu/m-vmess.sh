@@ -68,7 +68,9 @@ read -n 1 -s -r -p "Press any key to back"
 add-vmess
 fi
 done
-uuid=$(cat /proc/sys/kernel/random/uuid)
+#uuid=$(cat /proc/sys/kernel/random/uuid)
+read -p " Masukkan UUID (kosongi buat random) : " uuid
+    [[ -z "$uuid" ]] && uuid=$(cat /proc/sys/kernel/random/uuid)
 until [[ $masaaktif =~ ^[0-9]+$ ]]; do
 read -p "Expired (hari): " masaaktif
 done

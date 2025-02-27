@@ -769,7 +769,7 @@ iplimit=$(cat /etc/trojan/${akun}IP)
 jum2=$(cat /tmp/iptrojan.txt | wc -l)
 byte=$(cat /etc/trojan/${akun})
 lim=$(convert ${byte})
-wey=$(cat /etc/trojan/userQuota/${akun})
+wey=$(cat /etc/trojan/${akun}IP)
 gb=$(convert ${wey})
 lastlogin=$(cat /var/log/xray/access.log | grep -w "$akun" | tail -n 100 | cut -d " " -f 2 | tail -1)
 echo -e "$COLOR1${NC} USERNAME : \033[0;33m$akun";

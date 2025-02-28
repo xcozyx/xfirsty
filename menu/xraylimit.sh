@@ -460,7 +460,7 @@ cd
 if [[ ! -e /etc/limit/trojan ]]; then
 mkdir -p /etc/limit/trojan
 fi
-trda=($(cat /etc/xray/config.json | grep "^#trg" | awk '{print $2}' | sort -u))
+trda=($(cat /etc/xray/config.json | grep "^#tr" | awk '{print $2}' | sort -u))
 echo -n >/tmp/tr
 for db3 in ${trda[@]}; do
 logtr=$(cat /var/log/xray/access.log | grep -w "email: ${db3}" | tail -n 150)

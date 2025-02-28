@@ -749,7 +749,7 @@ fi
 function cek-tr(){
 clear
 echo -n > /tmp/other.txt
-data=( `cat /etc/xray/config.json | grep '^#tr' | cut -d ' ' -f 2 | sort | uniq`);
+data=( `cat /etc/xray/config.json | grep '^#!' | cut -d ' ' -f 2 | sort | uniq`);
 echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
 echo -e "$COLOR1│${NC}${COLBG1}             ${WH}• TROJAN USER ONLINE •               ${NC}$COLOR1│ $NC"
 echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
@@ -782,9 +782,9 @@ echo > /dev/null
 else
 iplimit=$(cat /etc/trojan/${akun}IP)
 jum2=$(cat /tmp/iptrojan.txt | wc -l)
-byte=$(cat /etc/limit/trojan/${akun})
+byte=$(cat /etc/trojan/${akun})
 lim=$(convert ${byte})
-wey=$(cat /etc/trojan/${akun}IP)
+wey=$(cat /etc/limit/trojan/${akun}IP)
 gb=$(convert ${wey})
 lastlogin=$(cat /var/log/xray/access.log | grep -w "$akun" | tail -n 100 | cut -d " " -f 2 | tail -1)
 echo -e "$COLOR1${NC} USERNAME : \033[0;33m$akun";

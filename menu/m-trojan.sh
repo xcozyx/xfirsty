@@ -67,8 +67,22 @@ add-tr
 fi
 done
 #uuid=$(cat /proc/sys/kernel/random/uuid)
+echo -e "KOSONGKAN UNTUK RANDOM UUID/PASSWORD"
 read -p " Masukkan UUID (kosongi buat random) : " uuid
     [[ -z "$uuid" ]] && uuid=$(cat /proc/sys/kernel/random/uuid)
+sec=3
+echo ""
+spinner=(⣻ ⢿ ⡿ ⣟ ⣯ ⣷)
+while [ $sec -gt 0 ]; do
+  echo -ne "\e[33m ${spinner[sec]} Setting up a Premium Account $sec seconds...\r"
+  sleep 1
+  sec=$(($sec - 1))
+done
+clear
+echo ""
+echo -e "\e[1;32m   input dependecies account $user\e[0m\n"
+echo -e "\033[0;33m .::.  SCRIPT BY XCOZY  .::.\e[0m\n"
+echo ""
 until [[ $masaaktif =~ ^[0-9]+$ ]]; do
 read -p "Expired (hari): " masaaktif
 done
@@ -748,58 +762,59 @@ fi
 }
 function cek-tr(){
 clear
-echo -n > /tmp/other.txt
-data=( `cat /etc/xray/config.json | grep '^#tr' | cut -d ' ' -f 2 | sort | uniq`);
-echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
-echo -e "$COLOR1│${NC}${COLBG1}             ${WH}• TROJAN USER ONLINE •               ${NC}$COLOR1│ $NC"
-echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
-echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
-
-for akun in "${data[@]}"
-do
-if [[ -z "$akun" ]]; then
-akun="tidakada"
+xrayy=$(cat /var/log/xray/access.log | wc -l)
+if [[ xrayy -le 5 ]]; then
+systemctl restart xray
 fi
-
-echo -n > /tmp/iptrojan.txt
-data2=( `cat /var/log/xray/access.log | tail -n 150 | cut -d " " -f 3 | sed 's/tcp://g' | cut -d ":" -f 1 | sort | uniq`);
-for ip in "${data2[@]}"
-do
-
-jum=$(cat /var/log/xray/access.log | grep -w "$akun" | tail -n 100 | cut -d " " -f 3 | sed 's/tcp://g' | cut -d ":" -f 1 | grep -w "$ip" | sort | uniq)
-if [[ "$jum" = "$ip" ]]; then
-echo "$jum" >> /tmp/iptrojan.txt
-else
-echo "$ip" >> /tmp/other.txt
+xraylimit
+echo -e "$COLOR1╭═════════════════════════════════════════════════╮${NC}"
+echo -e "$COLOR1│${NC}${COLBG1}             ${WH}• TROJAN USER ONLINE •              ${NC}$COLOR1│ $NC"
+echo -e "$COLOR1╰═════════════════════════════════════════════════╯${NC}"
+echo -e "$COLOR1╭═════════════════════════════════════════════════╮${NC}"
+trda=($(cat /etc/xray/config.json | grep "^#tr" | awk '{print $2}' | sort -u))
+echo -n >/tmp/tr
+for db1 in ${trda[@]}; do
+logtr=$(cat /var/log/xray/access.log | grep -w "email: ${db1}" | tail -n 100)
+while read a; do
+if [[ -n ${a} ]]; then
+set -- ${a}
+ina="${7}"
+inu="${2}"
+anu="${3}"
+enu=$(echo "${anu}" | sed 's/tcp://g' | sed '/^$/d' | cut -d. -f1,2,3)
+now=$(tim2sec ${timenow})
+client=$(tim2sec ${inu})
+nowt=$(((${now} - ${client})))
+if [[ ${nowt} -lt 40 ]]; then
+cat /tmp/tr | grep -w "${ina}" | grep -w "${enu}" >/dev/null
+if [[ $? -eq 1 ]]; then
+echo "${ina} ${inu} WIB : ${enu}" >>/tmp/tr
+restr=$(cat /tmp/tr)
 fi
-jum2=$(cat /tmp/iptrojan.txt)
-sed -i "/$jum2/d" /tmp/other.txt > /dev/null 2>&1
+fi
+fi
+done <<<"${logtr}"
 done
-
-jum=$(cat /tmp/iptrojan.txt)
-if [[ -z "$jum" ]]; then
-echo > /dev/null
-else
-iplimit=$(cat /etc/trojan/${akun}IP)
-jum2=$(cat /tmp/iptrojan.txt | wc -l)
-byte=$(cat /etc/trojan/${akun})
-lim=$(convert ${byte})
-wey=$(cat /etc/limit/trojan/${akun})
-gb=$(convert ${wey})
-lastlogin=$(cat /var/log/xray/access.log | grep -w "$akun" | tail -n 100 | cut -d " " -f 2 | tail -1)
-echo -e "$COLOR1${NC} USERNAME : \033[0;33m$akun";
-echo -e "$COLOR1${NC} LOGIN    : \033[0;33m$lastlogin";
-echo -e "$COLOR1${NC} KUOTA    : \033[0;33m${gb}";
-echo -e "$COLOR1${NC} LIMIT    : \033[0;33m${lim}";
-echo -e "$COLOR1${NC} IP LIMIT : \033[0;33m$iplimit";
-echo -e "$COLOR1${NC} IP LOGIN : \033[0;33m$jum2";
+if [[ ${restr} != "" ]]; then
+for usrtr in ${trda[@]}; do
+trip=$(cat /tmp/tr | grep -w "${usrtr}" | wc -l)
+tess=0
+if [[ ${trip} -gt $tess ]]; then
+byt=$(cat /etc/limit/trojan/${usrtr})
+gb=$(convert ${byt})
+lim=$(cat /etc/trojan/${usrtr})
+lim2=$(convert ${lim})
+sadsde=$(cat /etc/trojan/${usrtr}IP)
+lastlogin=$(cat /var/log/xray/access.log | grep -w "$user" | tail -n 500 | cut -d " " -f 2 | tail -1)
+printf "  %-13s %-7s %-8s %2s\n" "  USERNAME : ${usrtr}" | lolcat
+printf "  %-13s %-7s %-8s %2s\n" "  LOGIN    : $lastlogin" | lolcat 
+printf "  %-13s %-7s %-8s %2s\n" "  LIMIT GB : ${gb}/${lim2}" | lolcat  
+printf "  %-13s %-7s %-8s %2s\n" "  LIMIT IP : $trip/$sadsde" | lolcat;
 echo -e ""
 fi
-rm -rf /tmp/iptrojan.txt
 done
-
-rm -rf /tmp/other.txt
-echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
+fi
+echo -e "$COLOR1╰═════════════════════════════════════════════════╯${NC}"
 echo ""
 read -n 1 -s -r -p "   Press any key to back on menu"
 m-trojan

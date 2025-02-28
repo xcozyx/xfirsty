@@ -1053,7 +1053,7 @@ dir1="/etc/limit/vmess"
 [[ ! -d "$dir" ]] && mkdir -p "$dir"
 [[ ! -d "$dir1" ]] && mkdir -p "$dir1"
 
-data5=( $(grep '#vmg' /etc/xray/config.json | cut -d ' ' -f 2 | sort -u) )
+data5=( $(grep '#vm' /etc/xray/config.json | cut -d ' ' -f 2 | sort -u) )
 
 for akun in "${data5[@]}"
 do
@@ -1076,7 +1076,7 @@ fi
 function cek-vmess(){
 clear
 echo -n > /tmp/other.txt
-data=( `cat /etc/xray/config.json | grep '^#vmg' | cut -d ' ' -f 2 | sort | uniq`);
+data=( `cat /etc/xray/config.json | grep '^#vm' | cut -d ' ' -f 2 | sort | uniq`);
 echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
 echo -e "$COLOR1│${NC}${COLBG1}             ${WH}• VMESS USER ONLINE •               ${NC}$COLOR1│ $NC"
 echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"

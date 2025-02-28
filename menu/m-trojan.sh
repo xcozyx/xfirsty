@@ -726,7 +726,7 @@ dir2="/etc/limit/trojan"
 [[ ! -d "$dir1" ]] && mkdir -p "$dir1"
 [[ ! -d "$dir2" ]] && mkdir -p "$dir2"
 
-data5=( $(grep '#!' /etc/xray/config.json | cut -d ' ' -f 2 | sort -u) )
+data5=( $(grep '#tr' /etc/xray/config.json | cut -d ' ' -f 2 | sort -u) )
 
 for akun in "${data5[@]}"
 do

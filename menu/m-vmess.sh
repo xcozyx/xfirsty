@@ -1047,6 +1047,11 @@ arg="$prev"
 done
 echo "$inu"
 }
+
+echo -n > /var/log/xray/access.log
+systemctl restart xray
+sleep 5
+
 dir="/etc/kyt/limit/vmess/ip"
 dir1="/etc/limit/vmess"
 

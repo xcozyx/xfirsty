@@ -1047,6 +1047,20 @@ arg="$prev"
 done
 echo "$inu"
 }
+dir="/etc/kyt/limit/vmess/ip"
+dir1="/etc/limit/vmess"
+
+[[ ! -d "$dir" ]] && mkdir -p "$dir"
+[[ ! -d "$dir1" ]] && mkdir -p "$dir1"
+
+data5=( $(grep '###' /etc/xray/config.json | cut -d ' ' -f 2 | sort -u) )
+
+for akun in "${data5[@]}"
+do
+    [[ ! -e /etc/kyt/limit/vmess/ip/$akun ]] && echo "2" > /etc/kyt/limit/vmess/ip/$akun
+    [[ ! -e /etc/vmess/$akun ]] && echo "107374182400" > /etc/vmess/$akun
+    [[ ! -e /etc/limit/vmess/$akun ]] && echo "0" > /etc/limit/vmess/$akun
+done >/dev/null 2>&1
 function convert() {
 local -i bytes=$1
 if [[ $bytes -lt 1024 ]]; then
@@ -1098,7 +1112,7 @@ iplimit=$(cat /etc/vmess/${akun}IP)
 jum2=$(cat /tmp/ipvmess.txt | wc -l)
 byte=$(cat /etc/vmess/${akun})
 lim=$(convert ${byte})
-wey=$(cat /etc/vmess/${akun})
+wey=$(cat /etc/limit/vmess/${akun})
 gb=$(convert ${wey})
 lastlogin=$(cat /var/log/xray/access.log | grep -w "$akun" | tail -n 100 | cut -d " " -f 2 | tail -1)
 echo -e "$COLOR1${NC} USERNAME : \033[0;33m$akun";

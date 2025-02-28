@@ -719,6 +719,21 @@ arg="$prev"
 done
 echo "$inu"
 }
+
+dir1="/etc/kyt/limit/trojan/ip"
+dir2="/etc/limit/trojan"
+
+[[ ! -d "$dir1" ]] && mkdir -p "$dir1"
+[[ ! -d "$dir2" ]] && mkdir -p "$dir2"
+
+data5=( $(grep '#!' /etc/xray/config.json | cut -d ' ' -f 2 | sort -u) )
+
+for akun in "${data5[@]}"
+do
+    [[ ! -e /etc/kyt/limit/trojan/ip/$akun ]] && echo "2" > /etc/kyt/limit/trojan/ip/$akun
+    [[ ! -e /etc/trojan/$akun ]] && echo "107374182400" > /etc/trojan/$akun
+    [[ ! -e /etc/limit/trojan/$akun ]] && echo "0" > /etc/limit/trojan/$akun
+done >/dev/null 2>&1
 function convert() {
 local -i bytes=$1
 if [[ $bytes -lt 1024 ]]; then
@@ -767,7 +782,7 @@ echo > /dev/null
 else
 iplimit=$(cat /etc/trojan/${akun}IP)
 jum2=$(cat /tmp/iptrojan.txt | wc -l)
-byte=$(cat /etc/trojan/${akun})
+byte=$(cat /etc/limit/trojan/${akun})
 lim=$(convert ${byte})
 wey=$(cat /etc/trojan/${akun}IP)
 gb=$(convert ${wey})

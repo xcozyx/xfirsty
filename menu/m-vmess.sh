@@ -1048,6 +1048,21 @@ done
 echo "$inu"
 }
 
+function convert() {
+local -i bytes=$1
+if [[ $bytes -lt 1024 ]]; then
+echo "${bytes} B"
+elif [[ $bytes -lt 1048576 ]]; then
+echo "$(((bytes + 1023) / 1024)) KB"
+elif [[ $bytes -lt 1073741824 ]]; then
+echo "$(((bytes + 1048575) / 1048576)) MB"
+else
+echo "$(((bytes + 1073741823) / 1073741824)) GB"
+fi
+}
+function cek-vmess(){
+clear
+
 echo -n > /var/log/xray/access.log
 systemctl restart xray
 sleep 5
@@ -1066,20 +1081,6 @@ do
     [[ ! -e /etc/vmess/$akun ]] && echo "107374182400" > /etc/vmess/$akun
     [[ ! -e /etc/limit/vmess/$akun ]] && echo "0" > /etc/limit/vmess/$akun
 done >/dev/null 2>&1
-function convert() {
-local -i bytes=$1
-if [[ $bytes -lt 1024 ]]; then
-echo "${bytes} B"
-elif [[ $bytes -lt 1048576 ]]; then
-echo "$(((bytes + 1023) / 1024)) KB"
-elif [[ $bytes -lt 1073741824 ]]; then
-echo "$(((bytes + 1048575) / 1048576)) MB"
-else
-echo "$(((bytes + 1073741823) / 1073741824)) GB"
-fi
-}
-function cek-vmess(){
-clear
 echo -n > /tmp/other.txt
 data=( `cat /etc/xray/config.json | grep '^#vm' | cut -d ' ' -f 2 | sort | uniq`);
 echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"

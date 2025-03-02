@@ -27,7 +27,7 @@ checking_sc() {
 }
 checking_sc
 clear
-Repo1="https://raw.githubusercontent.com/valkry7/Regist/MONSTER/"
+Repo1="https://raw.githubusercontent.com/xcozyx/iz/main/ip"
 export MYIP=$( curl -s https://ipinfo.io/ip/ )
 SELLER=$(curl -sS ${Repo1}ip | grep $MYIP | awk '{print $2}')
 Exp100=$(curl -sS ${Repo1}ip | grep $MYIP | awk '{print $3}')
@@ -51,15 +51,15 @@ BGX="\033[42m"
 END='\e[0m'
 AKTIF="VERIFIED"
 TOKEN="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"
-REPO="https://github.com/SatanFusionOfficial/permission.git"
+REPO="https://github.com/xcozyx/iz.git"
 EMAIL="sfvpnteam752@gmail.com"
 USER="SatanFusionOfficial"
 
 
 add-ip() {
 TIMES="10"
-CHATID="-1002034706650"
-KEY="6853223947:AAG3Pnp1Pu_RH8Eyu3Uh7dJu2_QApehOMUg"
+CHATID="5473436831"
+KEY="7996697427:AAGhHDpAPCxTeTJCgUrM3xFVZqOFLXGrZuk"
 URL="https://api.telegram.org/bot$KEY/sendMessage"
 
 
@@ -118,8 +118,8 @@ URL="https://api.telegram.org/bot$KEY/sendMessage"
     git add . &> /dev/null
     git commit -m m &> /dev/null
     git branch -M main &> /dev/null
-    git remote add origin https://github.com/SatanFusionOfficial/permission
-    git push -f https://${TOKEN}@github.com/SatanFusionOfficial/permission.git &> /dev/null
+    git remote add origin https://github.com/xcozyx/iz
+    git push -f https://${TOKEN}@github.com/xcozyx/iz.git &> /dev/null
     rm -rf /root/ipvps
     clear
     sleep 1
@@ -159,8 +159,8 @@ menu
 
 del-ip() {
 TIMES="10"
-CHATID="-1002034706650"
-KEY="6853223947:AAG3Pnp1Pu_RH8Eyu3Uh7dJu2_QApehOMUg"
+CHATID="5473436831"
+KEY="7996697427:AAGhHDpAPCxTeTJCgUrM3xFVZqOFLXGrZuk"
 URL="https://api.telegram.org/bot$KEY/sendMessage"
 
     rm -rf /root/ipvps
@@ -192,8 +192,8 @@ URL="https://api.telegram.org/bot$KEY/sendMessage"
     git add . &> /dev/null
     git commit -m m &> /dev/null
     git branch -M main &> /dev/null
-    git remote add origin https://github.com/SatanFusionOfficial/permission
-    git push -f https://${TOKEN}@github.com/SatanFusionOfficial/permission.git &> /dev/null
+    git remote add origin https://github.com/xcozyx/iz
+    git push -f https://${TOKEN}@github.com/xcozyx/iz.git &> /dev/null
     rm -rf /root/ipvps
     clear
     sleep 1
@@ -230,8 +230,8 @@ menu
 
 renew-ip() {
 TIMES="10"
-CHATID="-1002034706650"
-KEY="6853223947:AAG3Pnp1Pu_RH8Eyu3Uh7dJu2_QApehOMUg"
+CHATID="5473436831"
+KEY="7996697427:AAGhHDpAPCxTeTJCgUrM3xFVZqOFLXGrZuk"
 URL="https://api.telegram.org/bot$KEY/sendMessage"
 
     rm -rf /root/ipvps
@@ -264,8 +264,8 @@ URL="https://api.telegram.org/bot$KEY/sendMessage"
     git add . &> /dev/null
     git commit -m m &> /dev/null
     git branch -M main &> /dev/null
-    git remote add origin https://github.com/SatanFusionOfficial/permission
-    git push -f https://${TOKEN}@github.com/SatanFusionOfficial/permission.git &> /dev/null
+    git remote add origin https://github.com/xcozyx/iz
+    git push -f https://${TOKEN}@github.com/xcozyx/iz.git &> /dev/null
     rm -rf /root/ipvps
     clear
     sleep 1
